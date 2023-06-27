@@ -1,0 +1,5 @@
+/.venv
+/.idea
+/Prepare
+/apps/__pycache__
+/apps/*.log
