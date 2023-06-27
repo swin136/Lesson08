@@ -44,7 +44,6 @@ class MyLoger:
         """
         return self._is_print
 
-
     def write_log(self, log_msg: str, index_msg=0):
         """
         Пишет лог ошибки(сообщения в файл). Может также выводить текст на консоль.
@@ -61,4 +60,3 @@ class MyLoger:
                 file.write(f"{self.get_type_log(index_msg)}: {date} : {log_msg}\n")
         except IOError:
             print(f"Возникла ошибка ввода-вывода при попытке записи лога в файл {self.get_filelog()}")
-

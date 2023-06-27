@@ -9,7 +9,6 @@ class Question:
     _is_ask: bool
     _score: int
 
-
     def __init__(self, question: str, difficulty: int, answer: str):
         """
         Инициализируем поля экземплра класса
