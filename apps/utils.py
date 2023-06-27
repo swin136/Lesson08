@@ -10,7 +10,8 @@ from apps.mylogger import MyLoger
 # Заголовки для работы requests.get
 headers = {
     "Accept": "*/*",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+    "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
 }
 
 # Внешний ресур с вопросами для тестирования
@@ -49,6 +50,7 @@ def get_connection(url: str, site_headers: dict, attempts: int, is_log=True, ver
         else:
             return
 
+
 def calculate_user_result(questions: list):
     """
     Считаем статистику пользователя
@@ -67,6 +69,7 @@ def calculate_user_result(questions: list):
         'right_answers': right_answers,
         'total_score': total_score
     }
+
 
 def load_questions():
     """
@@ -96,4 +99,3 @@ def load_questions():
     else:
         print(f'Ошибка доступа к ресурсу {questions_url}')
         return
-

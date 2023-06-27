@@ -1,5 +1,6 @@
 from apps.utils import *
 
+
 def main():
     """
     Основная бизнес-логика приложения
@@ -35,6 +36,7 @@ def main():
     print(f"Получено правильных ответов: {result['right_answers']}")
     print(f"Набрано баллов: {result['total_score']}")
     input("[+] Нажмите Enter для завершения работы программы ... ")
+
 
 if __name__ == "__main__":
     main()
