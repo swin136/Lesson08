@@ -17,9 +17,9 @@ headers = {
 # Внешний ресур с вопросами для тестирования
 # questions_url = 'https://jsonkeeper.com/b/UF6R'
 # Мой основной
-questions_url = 'https://jsonkeeper.com/b/56B1'
+# questions_url = 'https://jsonkeeper.com/b/56B1'
 # История и география
-# questions_url = 'https://jsonkeeper.com/b/WDFB'
+questions_url = 'https://jsonkeeper.com/b/WDFB'
 
 # Каталог для хранения служебных файлов проекта
 APPS_DIR = 'apps'
@@ -58,8 +58,7 @@ def calculate_user_result(questions: list):
     :return: dict
     """
     total_questions = right_answers = total_score = 0
-    for question in questions:
-        total_questions += 1
+    for total_questions, question in enumerate(questions, start=1):
         if question.is_ask_question():
             if question.get_score():
                 right_answers += 1
