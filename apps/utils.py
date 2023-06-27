@@ -79,10 +79,15 @@ def load_questions():
             user_questions = [Question(item['question'], item['difficulty'], item['answer']) for item in response.json()]
             random.shuffle(user_questions)
             return user_questions
-        except requests.exceptions.JSONDecodeError as Error:
+        except requests.exceptions.JSONDecodeError as error:
             log = MyLoger(os.path.join(APPS_DIR, log_file))
             log.write_log(f"При чтении данных JSON с ресурса {questions_url} возникла ошибка: "  
-                          f"{type(Error).__name__} >>> {inspect.stack()[0]}")
+                          f"{type(error).__name__} >>> {inspect.stack()[0]}")
+            return
+        except TypeError as terror:
+            log = MyLoger(os.path.join(APPS_DIR, log_file))
+            log.write_log(f"При преобразовании JSON-данных с ресурса {questions_url} возникла ошибка: "
+                          f"{type(terror).__name__} >>> {inspect.stack()[0]}")
             return
     else:
         print(f'Ошибка доступа к ресурсу {questions_url}')
