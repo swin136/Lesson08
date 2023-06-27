@@ -7,7 +7,6 @@ from apps.question import Question
 from apps.mylogger import MyLoger
 
 
-
 # Заголовки для работы requests.get
 headers = {
     "Accept": "*/*",
@@ -21,20 +20,21 @@ headers = {
 # История и география
 questions_url = 'https://jsonkeeper.com/b/WDFB'
 
+# Каталог для хранения служебных файлов проекта
 APPS_DIR = 'apps'
+# Имя файла для хранения логов
 log_file = 'data.log'
-
 
 
 def get_connection(url: str, site_headers: dict, attempts: int, is_log=True, verify=True):
     """
     Загружает данные с внешнего ресурса. При неудачной попытке загрузки осуществляется повтор.
-    :param url:
-    :param site_headers:
-    :param attempts: количество попыток для доступа к ресурсу
+    :param url: ссылка на ресурс с JSON-данными
+    :param site_headers: заголовки из парсеров
+    :param attempts: количество повторных попыток для доступа к ресурсу
     :param is_log: включение ведения логирования
     :param verify: включение проверки SSL-сертефиката
-    :return:
+    :return: Response object (None в случае ошибок доступа)
     """
     try:
         response = requests.get(url=url, headers=site_headers, verify=verify)
@@ -52,8 +52,8 @@ def get_connection(url: str, site_headers: dict, attempts: int, is_log=True, ver
 def calculate_user_result(questions: list):
     """
     Считаем статистику пользователя
-    :param questions:
-    :return:
+    :param questions: список экземпляров класса Question
+    :return: dict
     """
     total_questions = right_answers = total_score = 0
     for question in questions:
@@ -71,24 +71,28 @@ def calculate_user_result(questions: list):
 def load_questions():
     """
     Получает список вопросов с внешнего ресурса. Возвращает список экземпляров класса Question
-    :return:
+    :return: list, элементы которого экземпляры класса Question, или None в случае падения программы
     """
     response = get_connection(url=questions_url, site_headers=headers, attempts=3, verify=False)
     if response is not None:
         try:
-            user_questions = [Question(item['question'], item['difficulty'], item['answer']) for item in response.json()]
-            random.shuffle(user_questions)
+            user_questions = [Question(item['question'], item['difficulty'], item['answer'])
+                              for item in response.json()]
+            random.shuffle(user_questions)  # Перемешиваем список
             return user_questions
+
         except requests.exceptions.JSONDecodeError as error:
             log = MyLoger(os.path.join(APPS_DIR, log_file))
             log.write_log(f"При чтении данных JSON с ресурса {questions_url} возникла ошибка: "  
                           f"{type(error).__name__} >>> {inspect.stack()[0]}")
             return
+
         except TypeError as terror:
             log = MyLoger(os.path.join(APPS_DIR, log_file))
             log.write_log(f"При преобразовании JSON-данных с ресурса {questions_url} возникла ошибка: "
                           f"{type(terror).__name__} >>> {inspect.stack()[0]}")
             return
+
     else:
         print(f'Ошибка доступа к ресурсу {questions_url}')
         return
