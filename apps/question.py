@@ -86,7 +86,7 @@ class Question:
         Формирование сообщения для ввыода пользователю о его правильном ответе на вопрос.
         :return: str
         """
-        return f"Ответ верный. Получено {self.get_points()} баллов."
+        return f"Ответ верный. Получено {self.get_score()} баллов."
 
     def get_score(self):
         """
