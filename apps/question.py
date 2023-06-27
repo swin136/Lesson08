@@ -26,13 +26,6 @@ class Question:
         self._is_ask = False
         self._score = 0
 
-    def get_question(self):
-        """
-        Зарезервированный геттер. Не используется.
-        :return:
-        """
-        return self._question
-
     def get_difficulty(self):
         """
         формирует текстовое представление сложности задавемого вопроса.
@@ -56,7 +49,7 @@ class Question:
         Формирует сообщение о задаваемом вопросе пользователю с категорией сложности вопроса.
         :return:
         """
-        # Взводим флаг поля: задавался ли вопрос
+        # Взводим флаг поля: "задавался ли вопрос пользователю"
         self._is_ask = True
         return f"Вопрос: {self._question}\nСложность: {self.get_difficulty()}"
 
