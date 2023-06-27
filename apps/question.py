@@ -6,6 +6,9 @@ class Question:
     _difficulty: int
     _answer: str
     _user_answer: str
+    _is_ask: bool
+    _score: int
+
 
     def __init__(self, question: str, difficulty: int, answer: str):
         """
@@ -19,6 +22,9 @@ class Question:
         self._answer = answer
         # Поле для хранения ответа пользователя, при инициализации экземплря класса - пустое
         self._user_answer = None
+        # Пользователю вопрос не задавался
+        self._is_ask = False
+        self._score = 0
 
     def get_question(self):
         """
@@ -41,12 +47,17 @@ class Question:
         :return:
         """
         self._user_answer = user_answer
+        # Начисляем баллы пользователю в случае правильного ответа
+        if self.is_correct():
+            self._score = self.get_points()
 
     def build_question(self):
         """
         Формирует сообщение о задаваемом вопросе пользователю с категорией сложности вопроса.
         :return:
         """
+        # Взводим флаг поля: задавался ли вопрос
+        self._is_ask = True
         return f"Вопрос: {self._question}\nСложность: {self.get_difficulty()}"
 
     def get_points(self):
@@ -76,3 +87,17 @@ class Question:
         :return: str
         """
         return f"Ответ верный. Получено {self.get_points()} баллов."
+
+    def get_score(self):
+        """
+        Возращает количесво полученных пользователем баллов за ответ на вопрос.
+        :return: int
+        """
+        return self._score
+
+    def is_ask_question(self):
+        """
+        Возращает True если пользователю задавался вопрос.
+        :return: bool
+        """
+        return self._is_ask
