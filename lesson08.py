@@ -1,6 +1,5 @@
 from apps.utils import *
 
-
 def main():
     """
     Основная бизнес-логика приложения

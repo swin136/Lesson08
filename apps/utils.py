@@ -43,7 +43,9 @@ def get_connection(url: str, site_headers: dict, attempts: int, is_log=True, ver
     except Exception as e:
         if is_log:
             log = MyLoger(os.path.join(APPS_DIR, log_file))
-            log.write_log(f"При доступе к ресурсу {url} возникла ошибка: {type(e).__name__} >>> {inspect.stack()[0]}")
+            log.write_log(f"При доступе к ресурсу {url} возникла ошибка: {type(e).__name__} >>> "
+                          f"модуль {inspect.stack()[0][1]}: функция {inspect.stack()[0][3]}: "
+                          f"строка {inspect.stack()[0][2]}")
         if attempts:
             time.sleep(3)
             get_connection(url=url, site_headers=site_headers, attempts=attempts - 1, is_log=is_log, verify=verify)
@@ -87,13 +89,15 @@ def load_questions():
         except requests.exceptions.JSONDecodeError as error:
             log = MyLoger(os.path.join(APPS_DIR, log_file))
             log.write_log(f"При чтении данных JSON с ресурса {questions_url} возникла ошибка: "  
-                          f"{type(error).__name__} >>> {inspect.stack()[0]}")
+                          f"{type(error).__name__} >>> модуль {inspect.stack()[0][1]}: "
+                          f"функция {inspect.stack()[0][3]}: строка {inspect.stack()[0][2]}")
             return
 
         except TypeError as terror:
             log = MyLoger(os.path.join(APPS_DIR, log_file))
             log.write_log(f"При преобразовании JSON-данных с ресурса {questions_url} возникла ошибка: "
-                          f"{type(terror).__name__} >>> {inspect.stack()[0]}")
+                          f"{type(terror).__name__} >>> модуль {inspect.stack()[0][1]}: "
+                          f"функция {inspect.stack()[0][3]}: строка {inspect.stack()[0][2]}")
             return
 
     else:
