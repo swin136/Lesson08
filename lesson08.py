@@ -7,7 +7,6 @@ def main():
     Основная бизнес-логика приложения
     :return: None
     """
-    # r = Question("", 4, "")
     # Формируем список вопросов для тестирования пользователяЛондон
     questions = load_questions()
     if questions is None:

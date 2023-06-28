@@ -2,7 +2,7 @@ import requests
 import inspect
 import time
 import os
-import random
+from random import shuffle
 from apps import UserQuestion
 from apps import loger
 
@@ -84,7 +84,7 @@ def load_questions():
         try:
             user_questions = [UserQuestion(item['question'], item['difficulty'], item['answer'])
                               for item in response.json()]
-            random.shuffle(user_questions)  # Перемешиваем список
+            shuffle(user_questions)  # Перемешиваем список
             return user_questions
 
         except requests.exceptions.JSONDecodeError as error:
