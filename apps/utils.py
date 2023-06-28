@@ -3,7 +3,7 @@ import inspect
 import time
 import os
 import random
-from apps import Question
+from apps import UserQuestion
 from apps import loger
 
 
@@ -82,7 +82,7 @@ def load_questions():
     response = get_connection(url=questions_url, site_headers=headers, attempts=3, verify=False)
     if response is not None:
         try:
-            user_questions = [Question(item['question'], item['difficulty'], item['answer'])
+            user_questions = [UserQuestion(item['question'], item['difficulty'], item['answer'])
                               for item in response.json()]
             random.shuffle(user_questions)  # Перемешиваем список
             return user_questions

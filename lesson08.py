@@ -1,10 +1,13 @@
-from apps.utils import *
+from apps.utils import load_questions
+from apps.utils import calculate_user_result as statistics
+
 
 def main():
     """
     Основная бизнес-логика приложения
     :return: None
     """
+    # r = Question("", 4, "")
     # Формируем список вопросов для тестирования пользователяЛондон
     questions = load_questions()
     if questions is None:
@@ -28,7 +31,7 @@ def main():
             print(question.build_negative_feedback())
 
     # Считаем статистику всей игры
-    result = calculate_user_result(questions)
+    result = statistics(questions)
     # Выводим статистику
     print('Вот и всё!')
     print(f"Всего задано вопросов: {result['total_questions']}")
