@@ -102,4 +102,5 @@ class Question:
         """
         self._score = value
 
+    # Свойство - набранные баллы пользователя
     score = property(get_score, set_score)
