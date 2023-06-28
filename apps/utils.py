@@ -1,6 +1,6 @@
 import requests
 import inspect
-import time
+from time import sleep
 import os
 from random import shuffle
 from apps import UserQuestion
@@ -47,7 +47,7 @@ def get_connection(url: str, site_headers: dict, attempts: int, is_log=True, ver
                           f"модуль {inspect.stack()[0][1]}: функция {inspect.stack()[0][3]}: "
                           f"строка {inspect.stack()[0][2]}")
         if attempts:
-            time.sleep(3)
+            sleep(3)
             get_connection(url=url, site_headers=site_headers, attempts=attempts - 1, is_log=is_log, verify=verify)
         else:
             return
