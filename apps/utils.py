@@ -59,12 +59,13 @@ def calculate_user_result(questions: list):
     :param questions: список экземпляров класса Question
     :return: dict
     """
+    # инициализируем счетчики
     total_questions = right_answers = total_score = 0
     for total_questions, question in enumerate(questions, start=1):
         if question.is_ask_question():
-            if question.get_score():
+            if question.score:
                 right_answers += 1
-                total_score += question.get_score()
+                total_score += question.score
 
     return {
         'total_questions': total_questions,

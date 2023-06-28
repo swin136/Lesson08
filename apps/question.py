@@ -41,7 +41,7 @@ class Question:
         self._user_answer = user_answer
         # Начисляем баллы пользователю в случае правильного ответа
         if self.is_correct():
-            self._score = self.get_points()
+            self.score = self.get_points()
 
     def build_question(self):
         """
@@ -78,7 +78,14 @@ class Question:
         Формирование сообщения для вывода пользователю о его правильном ответе на вопрос.
         :return: str
         """
-        return f"Ответ верный. Получено {self.get_score()} баллов."
+        return f"Ответ верный. Получено {self.score} баллов."
+
+    def is_ask_question(self):
+        """
+        Возращает True если пользователю задавался вопрос.
+        :return: bool
+        """
+        return self._is_ask
 
     def get_score(self):
         """
@@ -87,9 +94,12 @@ class Question:
         """
         return self._score
 
-    def is_ask_question(self):
+    def set_score(self, value):
         """
-        Возращает True если пользователю задавался вопрос.
-        :return: bool
+        Записывает в поле экземпляра объекта количество полученных пользователем баллов
+        :param value:
+        :return:
         """
-        return self._is_ask
+        self._score = value
+
+    score = property(get_score, set_score)
