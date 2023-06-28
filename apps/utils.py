@@ -14,7 +14,7 @@ headers = {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
 }
 
-# Внешний ресур с вопросами для тестирования
+# Внешние JSON-ресурсы с вопросами для тестирования
 # questions_url = 'https://jsonkeeper.com/b/UF6R'
 # Мой основной
 # questions_url = 'https://jsonkeeper.com/b/56B1'
