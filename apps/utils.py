@@ -82,8 +82,9 @@ def load_questions():
     response = get_connection(url=questions_url, site_headers=headers, attempts=3, verify=False)
     if response is not None:
         try:
-            user_questions = [UserQuestion(item['question'], item['difficulty'], item['answer'])
-                              for item in response.json()]
+            # user_questions = [UserQuestion(item['question'], item['difficulty'], item['answer'])
+            #                   for item in response.json()]
+            user_questions = [UserQuestion(**item) for item in response.json()]
             shuffle(user_questions)  # Перемешиваем список
             return user_questions
 
